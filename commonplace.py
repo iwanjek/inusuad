@@ -10,7 +10,13 @@ class Goal:
         self.inception_date = inception_date
 
 
-# start_date, end_date, resources, practice_methods, time_effort,
+def convert_to_dict(obj):
+    # Take custom object and turn it into a dict
+    obj_dict = dict(__class__=obj.__class__.__name__, __module__=obj.__module__)
+    obj_dict.update(obj.__dict__)
+
+    return obj_dict
+
 
 def get_self_reflect():
     config = configparser.ConfigParser()
