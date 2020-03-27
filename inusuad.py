@@ -1,18 +1,19 @@
 import configparser
+import setup
 
 import commonplace
 from datetime import datetime
-from os import system, name, path, makedirs
+import os
 from time import sleep
 
 
 def screen_clear():
     # windows os
-    if name == 'nt':
-        _ = system('cls')
+    if os.name == 'nt':
+        _ = os.system('cls')
     # for mac and linux(here, os.name is 'posix')
     else:
-        _ = system('clear')
+        _ = os.system('clear')
 
 
 def save_del_redo(obj):
@@ -40,11 +41,6 @@ def save_del_redo(obj):
         save_del_redo(obj)
 
     return continue_entry
-
-
-def setup():
-    if not path.exists('chronicle'):
-        makedirs('chronicle')
 
 
 def intro(intro_file):
@@ -77,6 +73,7 @@ def journal():
 ###################
 
 def main():
+    setup.main()
     config = configparser.ConfigParser()
     config.read('setup.cfg')
 
