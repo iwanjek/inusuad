@@ -17,15 +17,13 @@ def screen_clear():
 
 
 def save_del_redo(obj):
-    temp = commonplace.convert_to_dict(obj)
-    print(temp)
-
     answer = input("Enter \"save\" \"del\" or \"redo\" \n")
     answer = answer.lower()
     continue_entry = False
     if answer == "save":
         # here you would begin saving the file into a json file
         temp = commonplace.convert_to_dict(obj)
+        commonplace.save(temp)
     elif answer == "del":
         answer = input("Type \"yes\" to confirm delete. \n")
         answer = answer.lower()
@@ -47,7 +45,7 @@ def intro(intro_file):
     f = open(intro_file, "r")
     print(f.read())
 
-    sleep(4)
+    sleep(2)
     screen_clear()
 
     now = datetime.now()
@@ -63,7 +61,17 @@ def journal():
         lucky = input("What makes you lucky?\n")
         reflect_question = commonplace.get_self_reflect()
         reflect = input(reflect_question)
-        entry = input("What is today's journal entry?\n")
+
+        entry = ""
+        line = ""
+        print("What is today's journal entry?\n")
+        while continue_entry:
+            if line == "end":
+                continue_entry = False
+            else:
+                line = input()
+                entry = entry + line + "\n"
+
         today = commonplace.JournalPage(uniq_yesterday, feeling, lucky, reflect_question, reflect, entry)
         continue_entry = save_del_redo(today)
 
@@ -81,7 +89,6 @@ def main():
     intro(intro_file)
 
     journal()
-    print("on to next")
 
 
 main()
