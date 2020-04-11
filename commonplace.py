@@ -9,12 +9,6 @@ def getDateTimeFromISO8601String(s):
     d = dateutil.parser.parse(s)
     return d
 
-class Goal:
-    def __init__(self, goal, smart, inception_date):
-        self.goal = goal
-        self.smart = smart
-        self.inception_date = inception_date
-
 
 def save(entry):
     #save dict to text in json
@@ -55,6 +49,7 @@ def get_self_reflect():
 
 
 class JournalPage:
+
     def __init__(self, uniq_yesterday, feeling, lucky, reflect_question, reflect, entry):
         self.uniq_yesterday = uniq_yesterday
         self.feeling = feeling
@@ -63,3 +58,6 @@ class JournalPage:
         self.reflect = reflect
         self.entry = entry
         self.date = datetime.now().isoformat()
+
+
+
